@@ -20,9 +20,11 @@ class Admin_Panel_Editor {
     
     private function load_dependencies() {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin-panel-editor-admin.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin-panel-editor-admin.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-menu-editor-functions.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-notices-editor-functions.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-colors-editor-functions.php';
+        //require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shop-manager-css.css';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-shop-manager-admin.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-admin-panel-editor-loader.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-admin-panel-editor-i18n.php';
@@ -53,7 +55,8 @@ class Admin_Panel_Editor {
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'options_page' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'settings_init');
 
-        $this->loader->add_action( 'admin_head', $plugin_shop_manager_admin, 'is_shop_manager' );
+        $this->loader->add_action( 'admin_init', $plugin_shop_manager_admin, 'is_shop_manager' );
+        //$this->loader->add_action( 'admin_init', $plugin_shop_manager_admin, 'shop_manager_colors' );
         
     }
 

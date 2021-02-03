@@ -17,6 +17,7 @@ class Shop_Manager_Admin{
         if( in_array( 'shop_manager', (array) $user->roles ) ) {
             $this->shop_manager_menu_settings();
             $this->shop_manager_notices_settings();
+            $this->shop_manager_colors();
         }
     }
 
@@ -45,5 +46,14 @@ class Shop_Manager_Admin{
         }
 
     }
+
+    function shop_manager_colors() {
+        $options = get_option( 'admin_panel_colors_editor_option' );
+        define('options', $options);
+    
+        wp_register_style( 'custom_style_admin', 'http://localhost/backupUpBShop/wp-content/plugins/otm_admin_editor/admin/shop-manager-css.php',);
+        wp_enqueue_style( 'custom_style_admin' );
+    }
+
 }
 ?>
