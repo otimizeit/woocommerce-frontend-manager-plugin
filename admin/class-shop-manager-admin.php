@@ -1,6 +1,6 @@
 <?php
 class Shop_Manager_Admin{
-    
+
     private $plugin_name;
     private $version;
 
@@ -20,8 +20,84 @@ class Shop_Manager_Admin{
             $this->shop_manager_notices_settings();
             $this->shop_manager_colors();
             add_action( 'wp_before_admin_bar_render', array($this, 'shop_manager_admin_bar'), 0 );
-
+            add_filter( 'screen_options_show_screen', array( $this, 'remove_shop_manager_screen_options' ) );
+            add_action( 'admin_head', array( $this, 'shop_manager_screen_settings' ) );
+            add_action( 'add_meta_boxes', array( $this, 'sort_metaboxes_edit_product' ), 99 );
+            add_filter( 'get_user_option_screen_layout_product', array( $this, 'shop_manager_screen_layout_product' ) );
+       
         }
+    }
+
+    function shop_manager_screen_layout_product() {
+        $user = wp_get_current_user();
+        if ( in_array( 'shop_manager', (array) $user->roles ) ) { 
+            return 1;
+        }
+    }
+
+    function sort_metaboxes_edit_product() {
+        $user = wp_get_current_user();
+        if ( in_array( 'shop_manager', (array) $user->roles ) ) { 
+            remove_meta_box( 'postimagediv','product','side' );
+            remove_meta_box( 'product_catdiv', 'product', 'side' );
+            remove_meta_box( 'tagsdiv-product_tag', 'product', 'side' );
+            remove_meta_box( 'woocommerce-product-images', __( 'Product gallery', 'woocommerce' ), 'WC_Meta_Box_Product_Images::output', 'product', 'side', 'low' );
+            
+            
+            add_meta_box( 
+                'postimagediv',
+                'Imagem destaque',
+                'post_thumbnail_meta_box',
+                'product',
+                'after_title',
+                'high' 
+            );
+    
+            add_meta_box( 
+                'woocommerce-product-images', 
+                __( 'Product gallery', 'woocommerce' ), 
+                'WC_Meta_Box_Product_Images::output', 
+                'product', 
+                'after_title', 
+                'high' 
+            );
+    
+            add_meta_box( 
+                'tagsdiv-product_tag', 
+                'Tags de produto', 
+                'post_tags_meta_box', 
+                'product', 
+                'after_title', 
+                'high' 
+            );
+    
+            add_meta_box(
+                'product_catdiv',
+                'Categorias de produto',
+                'post_categories_meta_box',
+                'product',
+                'after_title',
+                'high'
+            );
+
+            add_meta_box( 
+                'submitdiv', 
+                'Publicar', 
+                'post_submit_meta_box', 
+                'product', 
+                'normal', 
+                'low' 
+            );
+            
+        }
+    }
+
+    function shop_manager_screen_settings() {
+        get_current_screen()->remove_help_tabs();
+    }
+
+    function remove_shop_manager_screen_options() { 
+            return false;
     }
 
     function shop_manager_admin_bar() {
@@ -33,7 +109,6 @@ class Shop_Manager_Admin{
         foreach( $admin_bar_nodes as $node_key => $node ) {
 
             if( !array_key_exists( $node_key, $options ) && !array_key_exists( (string)$node->parent, $options ) ) {
-                write_log($node_key);
                 $wp_admin_bar->remove_menu( $node_key );
             }
                 
