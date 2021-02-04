@@ -102,7 +102,33 @@ class Admin_Panel_Editor_Admin {
 		);
 		/* -------------------- */
 
-    }
+		/* Setting admin bar */
+		register_setting(
+			'admin_editor',
+			'admin_panel_bar_editor_option'
+        );
+        
+		if( false == get_option( 'admin_panel_bar_editor_option' ) ) {
+            add_option( 'admin_panel_bar_editor_option' );
+		}
+
+		add_settings_section(
+			'admin_panel_bar_editor_section',
+			'Admin Bar Editor',
+			array( 'Admin_Panel_Bar_Editor_Functions', 'admin_panel_bar_editor_section' ),
+			'admin_editor'
+		);
+
+		add_settings_field(
+			'Admin Bar Options',
+			'Admin Bar Options',
+			array( 'Admin_Panel_Bar_Editor_Functions', 'bar_options' ),
+			'admin_editor',
+			'admin_panel_bar_editor_section'
+		);
+		/* -------------------- */
+
+	}
     
     function admin_editor_options_page_html() {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/admin-view.php';

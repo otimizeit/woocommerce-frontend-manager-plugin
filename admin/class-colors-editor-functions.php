@@ -5,7 +5,7 @@ class Admin_Panel_Colors_Editor_Functions {
     static function colors_options() {
         
         $options = get_option( 'admin_panel_colors_editor_option' );
-        
+
         echo '<ul>';
         printf( '<li><label for="menu_text">%2$s</label><input type="text" id="menu_text" name="admin_panel_colors_editor_option[menu_text]" value="%1$s"/></li>', isset( $options[ 'menu_text' ] ) ? $options[ 'menu_text' ] : '' , __( 'Menu Text', 'admin-panel-editor' ) );
         printf( '<li><label for="menu_background">%2$s</label><input type="text" id="menu_background" name="admin_panel_colors_editor_option[menu_background]" value="%1$s"/></li>', isset( $options[ 'menu_background' ] ) ? $options[ 'menu_background' ] : '' , __( 'Menu Background', 'admin-panel-editor' ) );

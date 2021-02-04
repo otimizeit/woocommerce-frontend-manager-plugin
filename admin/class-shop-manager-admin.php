@@ -1,5 +1,6 @@
 <?php
 class Shop_Manager_Admin{
+    
     private $plugin_name;
     private $version;
 
@@ -18,12 +19,32 @@ class Shop_Manager_Admin{
             $this->shop_manager_menu_settings();
             $this->shop_manager_notices_settings();
             $this->shop_manager_colors();
+            add_action( 'wp_before_admin_bar_render', array($this, 'shop_manager_admin_bar'), 0 );
+
         }
+    }
+
+    function shop_manager_admin_bar() {
+
+        global $wp_admin_bar;
+        $options = (array) get_option( 'admin_panel_bar_editor_option' );
+        $admin_bar_nodes = $wp_admin_bar->get_nodes();
+        
+        foreach( $admin_bar_nodes as $node_key => $node ) {
+
+            if( !array_key_exists( $node_key, $options ) && !array_key_exists( (string)$node->parent, $options ) ) {
+                write_log($node_key);
+                $wp_admin_bar->remove_menu( $node_key );
+            }
+                
+        }
+        
     }
 
     function shop_manager_menu_settings() {
 
         global $menu;
+        $menu = (array) $menu;
         $user = wp_get_current_user();
         $options = get_option( 'admin_panel_menu_editor_option' );
         
@@ -48,9 +69,9 @@ class Shop_Manager_Admin{
     }
 
     function shop_manager_colors() {
+
         $options = get_option( 'admin_panel_colors_editor_option' );
-        define('options', $options);
-    
+        
         wp_register_style( 'custom_style_admin', 'http://localhost/backupUpBShop/wp-content/plugins/otm_admin_editor/admin/shop-manager-css.php',);
         wp_enqueue_style( 'custom_style_admin' );
     }

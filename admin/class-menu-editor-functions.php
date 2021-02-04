@@ -7,16 +7,16 @@ class Admin_Panel_Menu_Editor_Functions {
         $adminMenu = $menu;
         $menuTitles = array();
         $options = get_option( 'admin_panel_menu_editor_option' );
-        
-        write_log( $menu );
+        $shop_manager_capabilities = get_role('shop_manager')->capabilities;
 
         foreach ( $adminMenu as $mkey => $m) {
-            $menuTitle = $m[0];
-            if ( !strlen( $menuTitle ) ) {
-
-                $menuTitle = 'Divisor com prioridade '. $mkey;
+            if( array_key_exists( $m[1], $shop_manager_capabilities ) ) {
+                $menuTitle = $m[0];
+                if ( !strlen( $menuTitle ) ) {
+                    $menuTitle = 'Divisor com prioridade '. $mkey;
+                }
+                array_push( $menuTitles, $menuTitle );
             }
-            array_push( $menuTitles, $menuTitle );
         }
 
 
@@ -24,7 +24,6 @@ class Admin_Panel_Menu_Editor_Functions {
 	    foreach( $menuTitles as $menuOption ) {
 		
 		    $menuOption = preg_replace('#<span.*>$#i','', $menuOption);
-
 		    printf('<li><input type="checkbox" id="%1$s" name="admin_panel_menu_editor_option[%1$s]" value="1" %2$s/><label for="%1$s">%1$s</label></li>', $menuOption, checked( 1, isset($options[$menuOption]), false));
 		
 	    }
