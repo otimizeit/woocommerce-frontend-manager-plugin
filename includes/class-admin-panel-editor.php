@@ -41,13 +41,6 @@ class Admin_Panel_Editor {
     }
 
     private function define_admin_hooks() {
-        /*
-        $users_roles = wp_roles();
-        
-        foreach( $users_roles->roles as $function => $capabilities ) {
-            print_r( $function );
-        }
-        */
         
         $plugin_admin = new Admin_Panel_Editor_Admin( $this->get_plugin_name(), $this->get_version() );
         $plugin_shop_manager_admin = new Shop_Manager_Admin( $this->get_plugin_name(), $this->get_version() );
@@ -55,9 +48,9 @@ class Admin_Panel_Editor {
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'options_page' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'settings_init');
         
-        $this->loader->add_action( 'admin_init', $plugin_shop_manager_admin, 'is_shop_manager' );
-        //$this->loader->add_action( 'admin_init', $plugin_shop_manager_admin, 'shop_manager_colors' );
-        
+        $this->loader->add_action( 'after_setup_theme', $plugin_shop_manager_admin, 'is_shop_manager' );
+        //$this->loader->add_filter( 'woocommerce_register_post_type_shop_order', $plugin_shop_manager_admin, 'change_orders_place_function', 10, 1 );
+
     }
 
     public function run() {
