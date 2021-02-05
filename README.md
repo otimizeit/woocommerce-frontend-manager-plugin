@@ -1,0 +1,1 @@
+# woocommerce-frontend-manager-plugin
