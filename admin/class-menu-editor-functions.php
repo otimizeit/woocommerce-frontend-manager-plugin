@@ -7,16 +7,16 @@ class Admin_Panel_Menu_Editor_Functions {
         $adminMenu = $menu;
         $menuTitles = array();
         $options = get_option( 'admin_panel_menu_editor_option' );
-        $shop_manager_capabilities = get_role('shop_manager')->capabilities;
+        //$shop_manager_capabilities = get_role('shop_manager')->capabilities;
 
         foreach ( $adminMenu as $mkey => $m) {
-            if( array_key_exists( $m[1], $shop_manager_capabilities ) ) {
+            //if( array_key_exists( $m[1], $shop_manager_capabilities ) ) {
                 $menuTitle = $m[0];
                 if ( !strlen( $menuTitle ) ) {
                     $menuTitle = 'Divisor com prioridade '. $mkey;
                 }
                 array_push( $menuTitles, $menuTitle );
-            }
+            //}
         }
 
 

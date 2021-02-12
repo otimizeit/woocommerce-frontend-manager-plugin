@@ -23,6 +23,31 @@ class Admin_Panel_Editor_Admin {
     }
     
     function settings_init() {
+		/* Users Selector */
+		register_setting(
+			'admin_editor',
+			'admin_panel_users_selector_option'
+        );
+        
+		if( false == get_option( 'admin_panel_users_selector_option' ) ) {
+            add_option( 'admin_panel_users_selector_option' );
+		}
+
+		add_settings_section(
+			'admin_panel_users_selector_section',
+			'Users Selector',
+			array( 'Admin_Panel_Users_Selector_Functions', 'admin_panel_users_selector_section' ),
+			'admin_editor'
+		);
+
+		add_settings_field(
+			'Users Options',
+			'Users Options',
+			array( 'Admin_Panel_Users_Selector_Functions', 'users_options' ),
+			'admin_editor',
+			'admin_panel_users_selector_section'
+		);
+		/* -------------------- */
 
 		/* Setting menu options */
 		register_setting(
@@ -128,12 +153,13 @@ class Admin_Panel_Editor_Admin {
 		);
 		/* -------------------- */
 
+		
+
 	}
     
     function admin_editor_options_page_html() {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/admin-view.php';
     }
-    
     
 }
 ?>

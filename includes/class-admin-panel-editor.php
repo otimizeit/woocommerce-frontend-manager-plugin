@@ -24,6 +24,7 @@ class Admin_Panel_Editor {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-menu-editor-functions.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-notices-editor-functions.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-colors-editor-functions.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-users-selector-functions.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-bar-editor-functions.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-shop-manager-admin.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-admin-panel-editor-loader.php';
