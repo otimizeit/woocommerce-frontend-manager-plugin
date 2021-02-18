@@ -15,7 +15,7 @@ class Shop_Manager_Admin{
         
         $user = wp_get_current_user();
         $options = get_option( 'admin_panel_users_selector_option' );
-        
+
         if( array_key_exists( $user->user_login, (array) $options ) ) {
             
             add_action( 'admin_menu', array( $this, 'shop_manager_menu_settings'), 99 ) ;
@@ -163,7 +163,7 @@ class Shop_Manager_Admin{
 
         $options = get_option( 'admin_panel_colors_editor_option' );
         
-        wp_register_style( 'custom_style_admin', '/wp-content/plugins/otm_admin_editor/admin/shop-manager-css.php',);
+        wp_register_style( 'custom_style_admin', '/wp-content/plugins/otm_admin_editor/admin/shop-manager-css.php' );
         wp_enqueue_style( 'custom_style_admin' );
     }
 
