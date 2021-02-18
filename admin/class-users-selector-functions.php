@@ -19,7 +19,7 @@ class Admin_Panel_Users_Selector_Functions {
 
     static function admin_panel_users_selector_section( $args ) {
 		?>
-		<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'In this section it\'s possible to set notices options.', 'admin-panel-editor' ); ?></p>
+		<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'In this section it\'s possible select users for that settings will apply.', 'admin-panel-editor' ); ?></p>
 		<?php
         
     }

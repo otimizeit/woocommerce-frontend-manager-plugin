@@ -8,6 +8,13 @@ A wordpress plugin to edit some options of admin area.
 * In Admin Editor menu option you can set colors and choose menu options, admin bar options and if notices should show to selected users .
 * **IMPORTANT!** Options selected doesn't change plugins permissions. In others words, if a menu option doesn't have permission to show for a selected user, so it will not show.
 
+### Screenshots
+![users](https://res.cloudinary.com/doduseorq/image/upload/v1613670639/Readme%20Assets/1-users_otx7a1.png)
+![menu options](https://res.cloudinary.com/doduseorq/image/upload/v1613670639/Readme%20Assets/2-menu_isy5ku.png)
+![notices](https://res.cloudinary.com/doduseorq/image/upload/v1613670639/Readme%20Assets/3-notices_hkosxs.png)
+![colors](https://res.cloudinary.com/doduseorq/image/upload/v1613670639/Readme%20Assets/4-colors_qanstt.png)
+![admin bar](https://res.cloudinary.com/doduseorq/image/upload/v1613670639/Readme%20Assets/5-adminbar_y9exwu.png)
+
 ## Installation
 
 The Admin Area Editor can be installed directly into your plugins folder "as-is".
